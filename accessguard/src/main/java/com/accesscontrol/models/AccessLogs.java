@@ -71,5 +71,4 @@ public class AccessLogs {
     public void setArea(Area area) {
         this.area = area;
     }
-
 }
