@@ -1,6 +1,7 @@
 # Maven
 /.mvn/
 /target/
+accessguard/target/
 dependency-reduced-pom.xml
 
 # IntelliJ IDEA
