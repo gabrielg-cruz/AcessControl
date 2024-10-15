@@ -10,6 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "employee")
@@ -18,12 +21,17 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank(message = "Name is mandatory")
+    @Size(min = 3, max = 50, message = "Name must have a minimum of 3 characters")
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Email is mandatory")
+    @Size(min = 3, max = 50, message = "Email must have a minimum of 3 characters")
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @NotNull(message = "Role is mandatory")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
