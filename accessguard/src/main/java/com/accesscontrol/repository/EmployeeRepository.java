@@ -9,8 +9,9 @@ import com.accesscontrol.models.Employee;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+    Optional<Employee> findById(int id);
 
     Optional<Employee> findByEmail(String email);
 
-    Employee findByName(String name);
+    Optional<Employee> findByName(String name);
 }
