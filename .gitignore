@@ -4,6 +4,9 @@
 accessguard/target/
 dependency-reduced-pom.xml
 
+/resources/
+application.properties
+
 # IntelliJ IDEA
 .idea/
 *.iml
