@@ -5,11 +5,11 @@ import java.util.Set;
 import com.accesscontrol.enums.Role;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,7 +22,7 @@ public class Area {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany
+    @ElementCollection(targetClass = Role.class)
     private Set<Role> roles;
 
     public int getId() {
