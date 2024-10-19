@@ -3,7 +3,9 @@ package com.accesscontrol.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.accesscontrol.dto.EmployeeDTO;
 import com.accesscontrol.interfaces.IEmployeeServices;
+import com.accesscontrol.mapper.EmployeeMapper;
 import com.accesscontrol.models.Employee;
 import com.accesscontrol.repository.EmployeeRepository;
 
@@ -15,28 +17,33 @@ public class EmployeeServices implements IEmployeeServices {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = EmployeeMapper.INSTANCE.toEntity(employeeDTO);
+        Employee createdEmployee = employeeRepository.save(employee);
+        return EmployeeMapper.INSTANCE.toDTO(createdEmployee);
     }
 
     @Override
-    public Employee updateEmployee(int id, Employee updatedEmployee) {
+    public EmployeeDTO updateEmployee(int id, EmployeeDTO updatedEmployeeDTO) {
         Employee existingEmployee = findEmployeeById(id);
         if (existingEmployee == null) {
             throw new EntityNotFoundException("Employee with the id: " + id + "Was not found");
         }
 
         existingEmployee
-                .setName(updatedEmployee.getName() != null ? updatedEmployee.getName() : existingEmployee.getName());
+                .setName(updatedEmployeeDTO.getName() != null ? updatedEmployeeDTO.getName()
+                        : existingEmployee.getName());
 
         existingEmployee
                 .setEmail(
-                        updatedEmployee.getEmail() != null ? updatedEmployee.getEmail() : existingEmployee.getEmail());
+                        updatedEmployeeDTO.getEmail() != null ? updatedEmployeeDTO.getEmail()
+                                : existingEmployee.getEmail());
 
         existingEmployee
-                .setRole(updatedEmployee.getRole() != null ? updatedEmployee.getRole() : existingEmployee.getRole());
+                .setRole(updatedEmployeeDTO.getRole() != null ? updatedEmployeeDTO.getRole()
+                        : existingEmployee.getRole());
 
-        return employeeRepository.save(updatedEmployee);
+        return EmployeeMapper.INSTANCE.toDTO(employeeRepository.save(existingEmployee));
     }
 
     @Override
@@ -46,21 +53,23 @@ public class EmployeeServices implements IEmployeeServices {
     }
 
     @Override
-    public Employee findEmployeeByEmail(String email) {
-        return employeeRepository.findByEmail(email)
+    public EmployeeDTO findEmployeeByEmail(String email) {
+        Employee employee = employeeRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("Employee with the email: " + email + "Was not found"));
+        return EmployeeMapper.INSTANCE.toDTO(employee);
     }
 
     @Override
-    public Employee findEmployeeByName(String name) {
-        return employeeRepository.findByName(name)
+    public EmployeeDTO findEmployeeByName(String name) {
+        Employee employee = employeeRepository.findByName(name)
                 .orElseThrow(() -> new EntityNotFoundException("Employee with the name: " + name + "Was not found"));
+        return EmployeeMapper.INSTANCE.toDTO(employee);
     }
 
     @Override
-    public Employee deleteEmployee(int id) {
+    public EmployeeDTO deleteEmployee(int id) {
         Employee employee = findEmployeeById(id);
         employeeRepository.delete(employee);
-        return employee;
+        return EmployeeMapper.INSTANCE.toDTO(employee);
     }
 }
