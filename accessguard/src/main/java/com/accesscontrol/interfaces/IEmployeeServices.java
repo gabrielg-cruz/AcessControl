@@ -1,17 +1,18 @@
 package com.accesscontrol.interfaces;
 
+import com.accesscontrol.dto.EmployeeDTO;
 import com.accesscontrol.models.Employee;
 
 public interface IEmployeeServices {
-    Employee createEmployee(Employee employee);
+    EmployeeDTO createEmployee(EmployeeDTO updatedEmployeeDTO);
 
-    Employee updateEmployee(int id, Employee employee);
+    EmployeeDTO updateEmployee(int id, EmployeeDTO updateEmployeeDTO);
 
     Employee findEmployeeById(int id);
 
-    Employee findEmployeeByEmail(String email);
+    EmployeeDTO findEmployeeByEmail(String email);
 
-    Employee findEmployeeByName(String name);
+    EmployeeDTO findEmployeeByName(String name);
 
-    Employee deleteEmployee(int id);
+    EmployeeDTO deleteEmployee(int id);
 }
