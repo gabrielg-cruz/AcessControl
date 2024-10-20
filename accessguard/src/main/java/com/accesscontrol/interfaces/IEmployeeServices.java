@@ -1,5 +1,7 @@
 package com.accesscontrol.interfaces;
 
+import java.util.List;
+
 import com.accesscontrol.dto.EmployeeDTO;
 import com.accesscontrol.models.Employee;
 
@@ -8,7 +10,11 @@ public interface IEmployeeServices {
 
     EmployeeDTO updateEmployee(int id, EmployeeDTO updateEmployeeDTO);
 
-    Employee findEmployeeById(int id);
+    List<Employee> findAll();
+
+    Employee findEmployeeEntityById(int id);
+
+    EmployeeDTO findEmployeeById(int id);
 
     EmployeeDTO findEmployeeByEmail(String email);
 
