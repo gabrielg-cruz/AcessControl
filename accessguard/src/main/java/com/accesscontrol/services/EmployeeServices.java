@@ -1,5 +1,7 @@
 package com.accesscontrol.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class EmployeeServices implements IEmployeeServices {
 
     @Override
     public EmployeeDTO updateEmployee(int id, EmployeeDTO updatedEmployeeDTO) {
-        Employee existingEmployee = findEmployeeById(id);
+        Employee existingEmployee = findEmployeeEntityById(id);
         if (existingEmployee == null) {
             throw new EntityNotFoundException("Employee with the id: " + id + "Was not found");
         }
@@ -47,7 +49,19 @@ public class EmployeeServices implements IEmployeeServices {
     }
 
     @Override
-    public Employee findEmployeeById(int id) {
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public EmployeeDTO findEmployeeById(int id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Employee with the id: " + id + "Was not found"));
+        return EmployeeMapper.INSTANCE.toDTO(employee);
+    }
+
+    @Override
+    public Employee findEmployeeEntityById(int id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Employee with the id: " + id + "Was not found"));
     }
@@ -68,7 +82,7 @@ public class EmployeeServices implements IEmployeeServices {
 
     @Override
     public EmployeeDTO deleteEmployee(int id) {
-        Employee employee = findEmployeeById(id);
+        Employee employee = findEmployeeEntityById(id);
         employeeRepository.delete(employee);
         return EmployeeMapper.INSTANCE.toDTO(employee);
     }
