@@ -6,6 +6,7 @@ dependency-reduced-pom.xml
 
 /resources/
 application.properties
+pom.xml.versionsBackup
 
 # IntelliJ IDEA
 .idea/
