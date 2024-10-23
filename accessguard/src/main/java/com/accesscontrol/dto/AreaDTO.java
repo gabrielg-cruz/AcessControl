@@ -14,7 +14,7 @@ public class AreaDTO {
     private String name;
 
     @ElementCollection(targetClass = Role.class)
-    private Set<String> roles;
+    private Set<Role> roles;
 
     public int getId() {
         return id;
@@ -32,7 +32,7 @@ public class AreaDTO {
         this.name = name;
     }
 
-    public Set<String> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
