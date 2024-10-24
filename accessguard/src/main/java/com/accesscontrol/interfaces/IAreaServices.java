@@ -1,13 +1,20 @@
 package com.accesscontrol.interfaces;
 
+import java.util.List;
+
+import com.accesscontrol.dto.AreaDTO;
 import com.accesscontrol.models.Area;
 
 public interface IAreaServices {
-    Area createArea(Area area);
+    Area findAreaEntityById(int id);
 
-    Area updateArea(Area area);
+    List<Area> findAll();
 
-    Area findAreaById(int id);
+    AreaDTO createArea(AreaDTO area);
 
-    Area deleteArea(int id);
+    AreaDTO updateArea(int id, AreaDTO area);
+
+    AreaDTO findAreaById(int id);
+
+    AreaDTO deleteArea(int id);
 }
