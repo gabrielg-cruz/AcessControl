@@ -53,8 +53,9 @@ public class AreaServices implements IAreaServices {
     }
 
     @Override
-    public List<Area> findAll() {
-        return areaRepository.findAll();
+    public List<AreaDTO> findAll() {
+        List<Area> area = areaRepository.findAll();
+        return AreaMapper.INSTANCE.toDTOList(area);
     }
 
     @Override
