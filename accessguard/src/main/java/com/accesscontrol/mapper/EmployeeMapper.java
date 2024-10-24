@@ -1,5 +1,7 @@
 package com.accesscontrol.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -15,4 +17,8 @@ public interface EmployeeMapper {
 
     @Mapping(target = "id", ignore = true)
     Employee toEntity(EmployeeDTO employeeDTO);
+
+    List<EmployeeDTO> toDTOList(List<Employee> employee);
+
+    List<Employee> toEntityList(List<EmployeeDTO> employeeDTO);
 }
