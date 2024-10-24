@@ -49,8 +49,9 @@ public class EmployeeServices implements IEmployeeServices {
     }
 
     @Override
-    public List<Employee> findAll() {
-        return employeeRepository.findAll();
+    public List<EmployeeDTO> findAll() {
+        List<Employee> employees = employeeRepository.findAll();
+        return EmployeeMapper.INSTANCE.toDTOList(employees);
     }
 
     @Override
