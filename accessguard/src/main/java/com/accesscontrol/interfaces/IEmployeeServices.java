@@ -10,7 +10,7 @@ public interface IEmployeeServices {
 
     EmployeeDTO updateEmployee(int id, EmployeeDTO updateEmployeeDTO);
 
-    List<Employee> findAll();
+    List<EmployeeDTO> findAll();
 
     Employee findEmployeeEntityById(int id);
 
