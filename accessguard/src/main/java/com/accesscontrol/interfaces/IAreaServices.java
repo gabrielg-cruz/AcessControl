@@ -8,7 +8,7 @@ import com.accesscontrol.models.Area;
 public interface IAreaServices {
     Area findAreaEntityById(int id);
 
-    List<Area> findAll();
+    List<AreaDTO> findAll();
 
     AreaDTO createArea(AreaDTO area);
 
