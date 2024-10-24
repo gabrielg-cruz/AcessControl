@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accesscontrol.dto.EmployeeDTO;
-import com.accesscontrol.models.Employee;
 import com.accesscontrol.services.EmployeeServices;
 
 import jakarta.validation.Valid;
@@ -34,8 +33,8 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employees = employeeServices.findAll();
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+        List<EmployeeDTO> employees = employeeServices.findAll();
         return ResponseEntity.ok(employees);
     }
 
