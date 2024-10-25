@@ -24,6 +24,10 @@ public class AreaDTO {
         return name;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -32,8 +36,7 @@ public class AreaDTO {
         this.name = name;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
-
 }
