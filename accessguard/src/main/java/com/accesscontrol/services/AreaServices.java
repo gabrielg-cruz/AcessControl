@@ -47,7 +47,8 @@ public class AreaServices implements IAreaServices {
 
     @Override
     public AreaDTO findAreaById(int id) {
-        Area area = findAreaEntityById(id);
+        Area area = areaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Area with the id: " + id + "Was not found"));
         return AreaMapper.INSTANCE.toDTO(area);
     }
 
