@@ -2,6 +2,7 @@ package com.accesscontrol.models;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class AccessLogs {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
@@ -28,7 +29,7 @@ public class AccessLogs {
     @Column(nullable = false)
     private LocalDateTime exitTime;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "area_id", nullable = false)
     private Area area;
 
