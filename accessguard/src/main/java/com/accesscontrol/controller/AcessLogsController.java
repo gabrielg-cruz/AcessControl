@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accesscontrol.dto.AccessLogsDTO;
+import com.accesscontrol.models.Employee;
 import com.accesscontrol.services.AccessLogsServices;
+import com.accesscontrol.services.EmployeeServices;
 
 import jakarta.validation.Valid;
 
@@ -18,13 +20,15 @@ import jakarta.validation.Valid;
 public class AcessLogsController {
     @Autowired
     private AccessLogsServices accessLogsServices;
+    @Autowired
+    private EmployeeServices employeeServices;
 
     @PostMapping
-    public ResponseEntity<AccessLogsDTO> createdEmployee(@Valid @RequestBody AccessLogsDTO accessLogsDTO) {
-
-        AccessLogsDTO createdAccessLogsDTO = accessLogsServices.createAccessLogs(accessLogsDTO);
+    public ResponseEntity<AccessLogsDTO> createAccessLog(@Valid @RequestBody AccessLogsDTO accessLogsDTO) {
+        int employeeId = accessLogsDTO.getEmployeeId();
+        Employee employee = employeeServices.findEmployeeEntityById(employeeId);
+        AccessLogsDTO createdAccessLogsDTO = accessLogsServices.createAccessLogs(employee, accessLogsDTO);
 
         return new ResponseEntity<>(createdAccessLogsDTO, HttpStatus.CREATED);
     }
-
 }
