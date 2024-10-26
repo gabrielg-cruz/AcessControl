@@ -7,6 +7,7 @@ import com.accesscontrol.dto.AccessLogsDTO;
 import com.accesscontrol.interfaces.IAccessLogsServices;
 import com.accesscontrol.mapper.AccessLogsMapper;
 import com.accesscontrol.models.AccessLogs;
+import com.accesscontrol.models.Employee;
 import com.accesscontrol.repository.AccessLogsRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -15,6 +16,9 @@ import jakarta.persistence.EntityNotFoundException;
 public class AccessLogsServices implements IAccessLogsServices {
     @Autowired
     private AccessLogsRepository accessLogsRepository;
+
+    @Autowired
+    private AccessPermissionServices accessPermissionServices;
 
     @Override
     public AccessLogs findAccessLogsEntityById(int id) {
@@ -29,7 +33,10 @@ public class AccessLogsServices implements IAccessLogsServices {
     }
 
     @Override
-    public AccessLogsDTO createAccessLogs(AccessLogsDTO accessLogsDTO) {
+    public AccessLogsDTO createAccessLogs(Employee employee, AccessLogsDTO accessLogsDTO) {
+        if (!accessPermissionServices.isMaintenance(employee))
+            throw new IllegalArgumentException("Employee is not a maintenance");
+
         AccessLogs accessLogs = AccessLogsMapper.INSTANCE.toEntity(accessLogsDTO);
         AccessLogs createdAccessLogs = accessLogsRepository.save(accessLogs);
         return AccessLogsMapper.INSTANCE.toDTO(createdAccessLogs);
