@@ -23,10 +23,10 @@ public class AccessLogs {
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime accessTime;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime exitTime;
 
     @ManyToOne(cascade = CascadeType.MERGE)
