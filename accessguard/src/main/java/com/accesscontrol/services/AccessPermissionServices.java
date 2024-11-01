@@ -3,12 +3,12 @@ package com.accesscontrol.services;
 import org.springframework.stereotype.Service;
 
 import com.accesscontrol.enums.Role;
-import com.accesscontrol.interfaces.IAccessPemissionServices;
+import com.accesscontrol.interfaces.IAccessPermissionServices;
 import com.accesscontrol.models.Area;
 import com.accesscontrol.models.Employee;
 
 @Service
-public class AccessPermissionServices implements IAccessPemissionServices {
+public class AccessPermissionServices implements IAccessPermissionServices {
     @Override
     public boolean isMaintenance(Employee employee) {
         System.out.printf("Employee role: %s\n", employee.getRole());
