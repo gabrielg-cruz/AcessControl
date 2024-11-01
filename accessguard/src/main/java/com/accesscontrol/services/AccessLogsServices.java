@@ -7,6 +7,7 @@ import com.accesscontrol.dto.AccessLogsDTO;
 import com.accesscontrol.interfaces.IAccessLogsServices;
 import com.accesscontrol.mapper.AccessLogsMapper;
 import com.accesscontrol.models.AccessLogs;
+import com.accesscontrol.models.Area;
 import com.accesscontrol.models.Employee;
 import com.accesscontrol.repository.AccessLogsRepository;
 
@@ -33,9 +34,9 @@ public class AccessLogsServices implements IAccessLogsServices {
     }
 
     @Override
-    public AccessLogsDTO createAccessLogs(Employee employee, AccessLogsDTO accessLogsDTO) {
-        if (!accessPermissionServices.isMaintenance(employee))
-            throw new IllegalArgumentException("Employee is not a maintenance");
+    public AccessLogsDTO createAccessLogs(Employee employee, Area area, AccessLogsDTO accessLogsDTO) {
+        if (!accessPermissionServices.isMaintenance(employee) && !accessPermissionServices.isAllowed(employee, area))
+            throw new IllegalArgumentException("Employee is not allowed to access this area");
 
         AccessLogs accessLogs = AccessLogsMapper.INSTANCE.toEntity(accessLogsDTO);
         AccessLogs createdAccessLogs = accessLogsRepository.save(accessLogs);
