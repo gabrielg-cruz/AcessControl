@@ -2,6 +2,7 @@ package com.accesscontrol.interfaces;
 
 import com.accesscontrol.dto.AccessLogsDTO;
 import com.accesscontrol.models.AccessLogs;
+import com.accesscontrol.models.Area;
 import com.accesscontrol.models.Employee;
 
 public interface IAccessLogsServices {
@@ -9,7 +10,7 @@ public interface IAccessLogsServices {
 
     AccessLogsDTO findAccessLogsById(int id);
 
-    AccessLogsDTO createAccessLogs(Employee employee, AccessLogsDTO accessLogsDTO);
+    AccessLogsDTO createAccessLogs(Employee employee, Area area, AccessLogsDTO accessLogsDTO);
 
     AccessLogsDTO updateAccessLogs(int id, AccessLogsDTO accessLogsDTO);
 
