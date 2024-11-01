@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accesscontrol.dto.AccessLogsDTO;
+import com.accesscontrol.models.Area;
 import com.accesscontrol.models.Employee;
 import com.accesscontrol.services.AccessLogsServices;
+import com.accesscontrol.services.AreaServices;
 import com.accesscontrol.services.EmployeeServices;
 
 import jakarta.validation.Valid;
@@ -22,12 +24,18 @@ public class AcessLogsController {
     private AccessLogsServices accessLogsServices;
     @Autowired
     private EmployeeServices employeeServices;
+    @Autowired
+    private AreaServices areaServices;
 
     @PostMapping
     public ResponseEntity<AccessLogsDTO> createAccessLog(@Valid @RequestBody AccessLogsDTO accessLogsDTO) {
         int employeeId = accessLogsDTO.getEmployeeId();
+        int areaId = accessLogsDTO.getAreaId();
+
         Employee employee = employeeServices.findEmployeeEntityById(employeeId);
-        AccessLogsDTO createdAccessLogsDTO = accessLogsServices.createAccessLogs(employee, accessLogsDTO);
+        Area area = areaServices.findAreaEntityById(areaId);
+
+        AccessLogsDTO createdAccessLogsDTO = accessLogsServices.createAccessLogs(employee, area, accessLogsDTO);
 
         return new ResponseEntity<>(createdAccessLogsDTO, HttpStatus.CREATED);
     }
