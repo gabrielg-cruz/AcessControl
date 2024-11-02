@@ -1,8 +1,11 @@
 package com.accesscontrol.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,4 +42,11 @@ public class AcessLogsController {
 
         return new ResponseEntity<>(createdAccessLogsDTO, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<AccessLogsDTO>> getAllAccessLogs() {
+        List<AccessLogsDTO> accessLogs = accessLogsServices.findAll();
+        return ResponseEntity.ok(accessLogs);
+    }
+
 }
