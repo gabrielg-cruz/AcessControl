@@ -1,5 +1,7 @@
 package com.accesscontrol.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,12 @@ public class AccessLogsServices implements IAccessLogsServices {
 
     @Autowired
     private AccessPermissionServices accessPermissionServices;
+
+    @Override
+    public List<AccessLogsDTO> findAll() {
+        List<AccessLogs> accessLogs = accessLogsRepository.findAll();
+        return AccessLogsMapper.INSTANCE.toDTOList(accessLogs);
+    }
 
     @Override
     public AccessLogs findAccessLogsEntityById(int id) {
