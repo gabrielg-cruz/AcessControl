@@ -1,5 +1,7 @@
 package com.accesscontrol.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -19,4 +21,8 @@ public interface AccessLogsMapper {
     @Mapping(target = "employee.id", source = "employeeId")
     @Mapping(target = "area.id", source = "areaId")
     AccessLogs toEntity(AccessLogsDTO accessLogsDTO);
+
+    List<AccessLogsDTO> toDTOList(List<AccessLogs> accessLogs);
+
+    List<AccessLogs> toEntityList(List<AccessLogsDTO> areaDTO);
 }
