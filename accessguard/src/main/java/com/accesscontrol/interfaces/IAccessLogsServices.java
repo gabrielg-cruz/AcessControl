@@ -14,6 +14,10 @@ public interface IAccessLogsServices {
 
     AccessLogsDTO findAccessLogsById(int id);
 
+    List<AccessLogsDTO> findAccessLogsByEmployeeId(int employeeId);
+
+    List<AccessLogsDTO> findAccessLogsByAreaId(int areaId);
+
     AccessLogsDTO createAccessLogs(Employee employee, Area area, AccessLogsDTO accessLogsDTO);
 
     AccessLogsDTO updateAccessLogs(int id, AccessLogsDTO accessLogsDTO);

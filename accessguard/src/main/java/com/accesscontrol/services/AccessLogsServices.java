@@ -52,6 +52,18 @@ public class AccessLogsServices implements IAccessLogsServices {
     }
 
     @Override
+    public List<AccessLogsDTO> findAccessLogsByEmployeeId(int employeeId) {
+        List<AccessLogs> accessLogs = accessLogsRepository.findByEmployeeId(employeeId);
+        return AccessLogsMapper.INSTANCE.toDTOList(accessLogs);
+    }
+
+    @Override
+    public List<AccessLogsDTO> findAccessLogsByAreaId(int areaId) {
+        List<AccessLogs> accessLogs = accessLogsRepository.findByAreaId(areaId);
+        return AccessLogsMapper.INSTANCE.toDTOList(accessLogs);
+    }
+
+    @Override
     public AccessLogsDTO updateAccessLogs(int id, AccessLogsDTO accessLogsDTO) {
         AccessLogs accesslogs = findAccessLogsEntityById(id);
         if (accesslogs == null) {

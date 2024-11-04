@@ -57,6 +57,18 @@ public class AcessLogsController {
         return new ResponseEntity<>(accessLogs, HttpStatus.OK);
     }
 
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<AccessLogsDTO>> getAccessLogsByEmployeeId(@PathVariable int employeeId) {
+        List<AccessLogsDTO> accessLogs = accessLogsServices.findAccessLogsByEmployeeId(employeeId);
+        return ResponseEntity.ok(accessLogs);
+    }
+
+    @GetMapping("/area/{areaId}")
+    public ResponseEntity<List<AccessLogsDTO>> getAccessLogsByAreaId(@PathVariable int areaId) {
+        List<AccessLogsDTO> accessLogs = accessLogsServices.findAccessLogsByAreaId(areaId);
+        return ResponseEntity.ok(accessLogs);
+    }
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteAccessLog(@PathVariable int id) {
         accessLogsServices.deleteAccessLogs(id);
