@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,12 @@ public class AcessLogsController {
     public ResponseEntity<List<AccessLogsDTO>> getAllAccessLogs() {
         List<AccessLogsDTO> accessLogs = accessLogsServices.findAll();
         return ResponseEntity.ok(accessLogs);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AccessLogsDTO> getAccessLog(@PathVariable int id) {
+        AccessLogsDTO accessLogs = accessLogsServices.findAccessLogsById(id);
+        return new ResponseEntity<>(accessLogs, HttpStatus.OK);
     }
 
 }
